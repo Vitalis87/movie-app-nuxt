@@ -50,11 +50,7 @@ import axios from 'axios'
 
 export default {
   name: 'MovieDescription',
-  head() {
-    return {
-      title: this.movie.title,
-    }
-  },
+
 
   data() {
     return {
@@ -64,11 +60,16 @@ export default {
   async fetch() {
     await this.getMovieDescription()
   },
+  head() {
+    return {
+      title: this.movie.title,
+    }
+  },
   fetchDelay: 1000,
   methods: {
     async getMovieDescription() {
       const data = axios.get(
-        `https://api.themoviedb.org/3/movie/${this.$route.params.movieid}?api_key=37ed43a4f8eaa2abd75f9283692947bc&language=en-US`
+        `https://api.themoviedb.org/3/movie/${this.$route.params.movieid}?api_key=${process.env.API_KEY}&language=en-US`
       )
 
       const result = await data
